@@ -9,9 +9,9 @@
 fs=44100;
 load WordData.mat
 WordMap=WordMapExtended;
+FourierMap=containers.Map; % Create Foruier Map
 
 %% Recursively plot FT
-% TODO: Can also store in Map for later analysis
 keys=WordMap.keys();
 for i=1:WordMap.length()
     currentKey=keys{i}; % get current key
@@ -21,12 +21,27 @@ for i=1:WordMap.length()
         currentFFT=fftshift(fft(currentData)); % FFT
         dt=fs;
         currentF=linspace((-(1/2).*dt),((1/2).*dt),length(currentFFT)); % Get the freq vector
-        figure(i+j)
+        
+        figure(i+j-1)
         plot(currentF,currentFFT);
         title(strcat(currentKey,' FFT',int2str(j))); 
         xlabel('Frequency (Hz)')
         ylabel('UnNormalized Frequency')
         
+        % Add to Map
+        if FourierMap.isKey(currentKey)
+           % Append to cell array
+           currentArray=FourierMap(currentKey);
+           currentArray{length(currentArray)+1}=currentFFT;
+           FourierMap(currentKey)=currentArray;
+        else
+            % Add Key and Data to Map
+            FourierMap(currentKey)={currentFFT}
+            
+        end
+        
     end
     
+    
 end
+ save('FourierData.mat','FourierMap') % Save Map to file
