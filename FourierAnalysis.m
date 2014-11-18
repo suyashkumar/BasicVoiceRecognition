@@ -26,7 +26,7 @@ for i=1:WordMap.length()
         subplot(2,1,1),  plot(currentF,currentFFT);
         title(strcat(currentKey,' FFT', int2str(j))); 
         xlabel('Frequency (Hz)')
-        ylabel('Magnitude of Frequency in Word')
+        ylabel('Magnitude')
         subplot(2,1,2), plot(currentF(44101:end),currentFFT(44101:end))
         
         % Add to Map

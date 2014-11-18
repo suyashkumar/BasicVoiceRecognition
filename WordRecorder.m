@@ -1,6 +1,6 @@
 % Gets a recording from the user and saves it to a HashMap in WordData.mat
 % with the key being the spoken word (as a string). 
-% @author: Suyash Kumar
+% @author: Suyash Kumar (suyashkumar)
 
 
 %% Init
