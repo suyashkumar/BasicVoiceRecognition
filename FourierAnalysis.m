@@ -22,7 +22,7 @@ for i=1:WordMap.length()
         dt=fs;
         currentF=linspace((-(1/2).*dt),((1/2).*dt),length(currentFFT)); % Get the freq vector
         
-        figure(i+j-1)
+        figure()
         plot(currentF,currentFFT);
         title(strcat(currentKey,' FFT',int2str(j))); 
         xlabel('Frequency (Hz)')
@@ -36,7 +36,7 @@ for i=1:WordMap.length()
            FourierMap(currentKey)=currentArray;
         else
             % Add Key and Data to Map
-            FourierMap(currentKey)={currentFFT}
+            FourierMap(currentKey)= {currentFFT}
             
         end
         
