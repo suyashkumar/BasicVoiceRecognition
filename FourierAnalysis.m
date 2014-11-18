@@ -23,5 +23,4 @@ for i=1:WordMap.length()
     title(strcat(currentKey,' FFT')); 
     xlabel('Frequency (Hz)')
     ylabel('UnNormalized Frequency')
-    
 end
