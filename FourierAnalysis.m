@@ -23,10 +23,11 @@ for i=1:WordMap.length()
         currentF=linspace((-(1/2).*dt),((1/2).*dt),length(currentFFT)); % Get the freq vector
         
         figure()
-        plot(currentF,currentFFT);
-        title(strcat(currentKey,' FFT',int2str(j))); 
+        subplot(2,1,1),  plot(currentF,currentFFT);
+        title(strcat(currentKey,' FFT', int2str(j))); 
         xlabel('Frequency (Hz)')
-        ylabel('UnNormalized Frequency')
+        ylabel('Magnitude of Frequency in Word')
+        subplot(2,1,2), plot(currentF(44101:end),currentFFT(44101:end))
         
         % Add to Map
         if FourierMap.isKey(currentKey)
