@@ -20,17 +20,13 @@ while 1
     sampleSignal=getaudiodata(rSignal);
     
     % Check to see if key is a word
-    if (WordMapExtended.isKey(word))
+    if (WordMap.isKey(word))
         % Simply append to the cell array
-        current=WordMapExtended(word);
-        current{length(current)+1}=sampleSignal;
-        WordMapExtended(word)=current;
         
-    else 
-        % Need to create key and array for the word
-        WordMapExtended(word)={sampleSignal};
         
     end
-    save('WordData.mat','WordMapExtended') % Save Map to file. 
+
+    WordMap(word)=sampleSignal; % Add word to HashMap
+    save('WordData.mat','WordMap') % Save Map to file. 
 end
 

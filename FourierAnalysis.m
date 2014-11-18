@@ -8,19 +8,25 @@
 %% Init
 fs=44100;
 load WordData.mat
+WordMap=WordMapExtended;
 
 %% Recursively plot FT
 % TODO: Can also store in Map for later analysis
 keys=WordMap.keys();
 for i=1:WordMap.length()
     currentKey=keys{i}; % get current key
-    currentData=WordMap(currentKey);
-    currentFFT=fftshift(fft(currentData)); % FFT
-    dt=fs;
-    currentF=linspace((-(1/2).*dt),((1/2).*dt),length(currentFFT)); % Get the freq vector
-    figure(i)
-    plot(currentF,currentFFT);
-    title(strcat(currentKey,' FFT')); 
-    xlabel('Frequency (Hz)')
-    ylabel('UnNormalized Frequency')
+    currentBatch=WordMap(currentKey);
+    for j=1:length(currentBatch)
+        currentData=currentBatch{j};
+        currentFFT=fftshift(fft(currentData)); % FFT
+        dt=fs;
+        currentF=linspace((-(1/2).*dt),((1/2).*dt),length(currentFFT)); % Get the freq vector
+        figure(i+j)
+        plot(currentF,currentFFT);
+        title(strcat(currentKey,' FFT',int2str(j))); 
+        xlabel('Frequency (Hz)')
+        ylabel('UnNormalized Frequency')
+        
+    end
+    
 end
