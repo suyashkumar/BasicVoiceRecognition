@@ -13,4 +13,4 @@ TY2=(TY2 > .09).*(TY2);
 
 St = sum((TY1 - mean(TY1) ).^2)
 Sr = sum((TY1 - TY2).^2)
-R = (St - Sr) / St
+R = abs((St - Sr) / St)
