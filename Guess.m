@@ -18,7 +18,9 @@ R(1) = max(r);
 R(2) = max((r < R(1)).*r);
 R(3) = max((r < R(2)).*r);
 
-Word(1) = keys{r == R(1)};
-Word(2) = keys{r == R(2)};
-Word(3) = keys{r == R(3)};
+test=find(r==R(1))
+Word={}
+Word{1} = keys{test};
+Word{2} = keys{find(r == R(2))};
+Word{3} = keys{find(r == R(3))};
 

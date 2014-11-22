@@ -16,13 +16,15 @@ disp('Press Enter to record input...')
 pause
 recordblocking(rSignal,2);
 inputSignal=getaudiodata(rSignal);
+disp('Thanks')
 
 % Calc FFT
 inputfft=fftshift(fft(inputSignal));
 
 % Predict: 
 tic
-label=predict(Mdl,abs(inputfft)');
+%label=predict(Mdl,abs(inputfft)');
 toc
 disp('Your Prediction: ')
-disp(label{1})
+[R,Words]=Guess(inputfft)
+%disp(label{1})
