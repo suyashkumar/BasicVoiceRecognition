@@ -1,4 +1,4 @@
-function [R,Word] = Guess(FftIn)
+function [R, Word] = Guess(FftIn)
 load WordData.mat
 WordMap=WordMapExtended;
 
@@ -6,7 +6,8 @@ keys=WordMap.keys();
 for i=1:WordMap.length()
     currentKey=keys{i}; % get current key
     currentBatch=WordMap(currentKey);
-    F2 = currentBatch{1}
+    for k = 1:length(currentBatch)
+    F2 = currentBatch{k};
     Y2=fftshift(fft(F2));
     TY2=abs(Y2)./max(abs(Y2(:)));
     St = sum((TY2 - mean(TY2) ).^2)
@@ -14,4 +15,11 @@ for i=1:WordMap.length()
     r(i) = abs((St - Sr) / St)
 end
 
-R(1) 
+R(1) = max(r);
+R(2) = max((r < R(1)).*r);
+R(3) = max((r < R(2)).*r);
+
+Word(1) = keys{find(r == R(1))};
+Word(2) = keys{find(r == R(2)};
+Word(3) = keys{r == R(3)};
+

@@ -1,6 +1,8 @@
 function [R, Word] = Guess(FftIn)
 load WordData.mat
 WordMap=WordMapExtended;
+FftIn = fftshift(fft(FftIn));
+FftIn = abs(FftIn)./max(abs(FftIn(:)));
 
 keys=WordMap.keys();
 for i=1:WordMap.length()
