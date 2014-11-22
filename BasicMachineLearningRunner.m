@@ -4,7 +4,7 @@
 clear, clc
 fs=44100; % Sample Rate
 rSignal=audiorecorder(fs,16,1,1); % Recorder to hold signal
-load TrainedModel.mat
+load TrainedModel2.mat
 
 %% Get Input
 % file1=input('Type the name of the .mat file with training data: ','s');
@@ -22,8 +22,7 @@ inputfft=fftshift(fft(inputSignal));
 
 % Predict: 
 tic
-label=predict(Mdl,inputfft');
+label=predict(Mdl,abs(inputfft)');
 toc
 disp('Your Prediction: ')
 disp(label{1})
-disp(elapsedTime(toc))

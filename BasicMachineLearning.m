@@ -9,17 +9,6 @@
 %% Init
 clear, clc
 fs=44100; % Sample Rate
-%rSignal=audiorecorder(fs,16,1,1); % Recorder to hold signal
-
-% file1=input('Type the name of the .mat file with training data: ','s');
-% loadString=strcat('load',{' '},file1);
-% disp(strcat('Loaded ',{' '},file1))
-% eval(loadString{1})
-% 
-% disp('Press Enter to record input...')
-% pause
-% recordblocking(rSignal,2);
-% inputSignal=getaudiodata(rSignal);
 load FourierData.mat
 
 %% Train Model
@@ -49,8 +38,7 @@ disp('Training Model...')
 tic
 Mdl=fitcnb(X,Y)
 save('TrainedModel2.mat','Mdl');
-eTime=elapsedTime(toc)
+toc
 disp('Done!')
-disp('Took')
-disp(eTime)
+
 
