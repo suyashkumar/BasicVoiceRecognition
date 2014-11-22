@@ -26,11 +26,19 @@ for i=1:WordMap.length()
         
         
         figure()
-        subplot(2,1,1),  plot(currentF,currentFFT);
+       subplot(2,2,1), plot(currentData)
+        title(strcat(currentKey, int2str(j), ' Input Signal')); 
+        xlabel('Samples')
+        ylabel('Magnitude')
+        subplot(2,2,3), plot(currentDataClean)
+        title(strcat(currentKey, int2str(j), 'Cleaned Input Signal')); 
+        xlabel('Samples')
+        ylabel('Magnitude')
+        subplot(2,2,2),  plot(currentF,currentFFT);
         title(strcat(currentKey,int2str(j),' FFT')); 
         xlabel('Frequency (Hz)')
         ylabel('Magnitude')
-        subplot(2,1,2), plot(currentF(44101:end),currentFFT(44101:end))
+        subplot(2,2,4), plot(currentF(44101:end),currentFFT(44101:end))
         title(strcat(currentKey,int2str(j),'truncated FFT')); 
         xlabel('Frequency (Hz)')
         ylabel('Magnitude')
