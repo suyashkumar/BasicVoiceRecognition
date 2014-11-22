@@ -18,8 +18,12 @@ recordblocking(rSignal,2);
 inputSignal=getaudiodata(rSignal);
 disp('Thanks')
 
+inputSignal=CleanInput(inputSignal);
+[inputfft, inputSignal]=BPFiltFFT(inputSignal);
+
 % Calc FFT
 inputfft=fftshift(fft(inputSignal));
+
 
 % Predict: 
 tic
