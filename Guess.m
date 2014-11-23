@@ -14,10 +14,14 @@ for i=1:WordMap.length()
     Sr = sum((FftIn - mean(TY2)).^2)
     r(i) = (Sr / St)
 end
+r = abs(r - 1)
+rt = r;
 
-R(1) = max(r);
-R(2) = max((r < R(1)).*r);
-R(3) = max((r < R(2)).*r);
+R(1) = min(r)
+rt(find(r == R(1))) = 10000000; 
+R(2) = min((rt > R(1)).*rt)
+rt(find(r == R(2))) = 10000000;
+R(3) = min((rt > R(2)).*rt)
 
 test=find(r==R(1))
 Word={}
