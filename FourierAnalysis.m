@@ -7,7 +7,7 @@
 
 %% Init
 fs=44100;
-load WordData.mat
+load MurphyVowelData.mat
 WordMap=WordMapExtended;
 FourierMap=containers.Map; % Create Foruier Map
 
@@ -51,4 +51,4 @@ for i=1:WordMap.length()
     
     
 end
- save('FourierData.mat','FourierMap') % Save Map to file
+ save('VowelFourierData.mat','FourierMap') % Save Map to file
