@@ -1,5 +1,6 @@
 load WordData.mat
 WordMap = WordMapExtended;
+
 %% Gets Data
 capData = WordMap('cap');
 batData = WordMap('bat');
@@ -51,9 +52,9 @@ while(count*1102<length(cdat))
         subplot(2,1,1)
         plot(currentF, abs(fftr)/max(abs(fftr)))
         count1= count1+1;
-%         t = sum(abs(fftr(551+535:551+615)));
-%         y = sum(abs(fftr(44100+1660:44100+1760)));
-%         title(strcat('585 Hz = ',int2str(t),' 1710 Hz = ', int2str(y)))
+        t = sum(abs(fftr(find(currentF>500 & currentF<525):find(currentF>600 & currentF<625))));
+        y = sum(abs(fftr(find(currentF>1670 & currentF<1710):find(currentF>1710 & currentF<1750))));
+        title(strcat('585 Hz = ',int2str(t),' 1710 Hz = ',int2str(y)))
     end
     
     %If block of Data2 contains sound data it is plotted
@@ -62,9 +63,9 @@ while(count*1102<length(cdat))
         subplot(2,1,2)
         plot(currentF2, abs(fftr2)/max(abs(fftr2)))
         count2 = count2+1;
-%         t = sum(abs(fftr2(44100+535:44100+615)));
-%         y = sum(abs(fftr2(44100+1660:44100+1760)));
-%         title(strcat('585 Hz = ',int2str(t),' 1710 Hz = ', int2str(y)))
+        t2 = sum(abs(fftr2(find(currentF2>500 & currentF2<525):find(currentF2>600 & currentF2<625))));
+        y2 = sum(abs(fftr2(find(currentF2>1670 & currentF2<1710):find(currentF2>1710 & currentF2<1750))));
+        title(strcat('585 Hz = ',int2str(t2),' 1710 Hz = ',int2str(y2)))
     end
     count = count+1;
 end
