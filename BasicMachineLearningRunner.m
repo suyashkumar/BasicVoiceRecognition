@@ -14,12 +14,14 @@ load TrainedModel2.mat
 
 disp('Press Enter to record input...')
 pause
+disp('Recording...')
 recordblocking(rSignal,2);
 inputSignal=getaudiodata(rSignal);
 disp('Thanks')
 
-inputSignal=CleanInput(inputSignal);
-[inputfft, inputSignal]=BPFiltFFT(inputSignal);
+%inputSignal=CleanInput(inputSignal);
+
+%[inputfft, inputSignalfft]=BPFiltFFT(inputSignal);
 
 % Calc FFT
 inputfft=fftshift(fft(inputSignal));
