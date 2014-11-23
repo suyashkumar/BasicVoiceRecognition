@@ -1,7 +1,6 @@
-function [R, Word] = Guess(FftIn)
+function [R,Word,Rall] = Guess(FftIn)
 load WordData.mat
 WordMap=WordMapExtended;
-FftIn = fftshift(fft(FftIn));
 FftIn = abs(FftIn)./max(abs(FftIn(:)));
 
 keys=WordMap.keys();
@@ -12,7 +11,7 @@ for i=1:WordMap.length()
     Y2=fftshift(fft(F2));
     TY2=abs(Y2)./max(abs(Y2(:)));
     St = sum((TY2 - mean(TY2) ).^2)
-    Sr = sum((TY2 - FftIn).^2)
+    Sr = sum((FftIn - mean(TY2)).^2)
     r(i) = abs((St - Sr) / St)
 end
 
@@ -25,4 +24,4 @@ Word={}
 Word{1} = keys{test};
 Word{2} = keys{find(r == R(2))};
 Word{3} = keys{find(r == R(3))};
-
+Rall = r;
