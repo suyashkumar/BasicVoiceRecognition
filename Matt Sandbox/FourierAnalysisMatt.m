@@ -19,9 +19,10 @@ for i=1:WordMap.length()
     for j=1:length(currentBatch)
         currentData=currentBatch{j};
         
-        currentDataClean = CleanInput(currentData);
+
         
         currentFFT=fftshift(fft(currentData)); % FFT
+        
         dt=fs;
         currentF=linspace((-(1/2).*dt),((1/2).*dt),length(currentFFT)); % Get the freq vector
         
