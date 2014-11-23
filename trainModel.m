@@ -32,8 +32,8 @@ for i=1:length(keys)
        end
        
        theData=abs(currentCells{j})';
-       disp(length(theData))
        theData=Binning(theData,binningFactor); % Binning 
+       
        
        X=vertcat(X,abs(currentCells{j})'); % add data to the X matrix, only magnitude
        

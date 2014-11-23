@@ -41,9 +41,8 @@ for i=1:length(keys)
        
        theData=abs(currentCells{j})';
        theData=theData(1:takeN);
-       size(theData)
-       
        theData=Binning(theData,binningFactor); % Binning 
+       theData=theData./max(theData); % Normalize
        
        X=vertcat(X,abs(theData)); % add data to the X matrix, only magnitude
        
@@ -53,8 +52,7 @@ end
 disp(Y)
 disp('Training Model...')
 tic
-Mdl=fitcnb(X,Y)
-save('TrainedModel2.mat','Mdl');
+Mdl=fitctree(X,Y)
 toc
 disp('Done!')
 
