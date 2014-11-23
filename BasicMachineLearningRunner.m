@@ -25,8 +25,7 @@ disp('Thanks')
 
 % Calc FFT
 inputfft=fftshift(fft(inputSignal));
-
-
+clear
 % Predict: 
 tic
 %label=predict(Mdl,abs(inputfft)');

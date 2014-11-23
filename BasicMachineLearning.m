@@ -28,6 +28,7 @@ for i=1:length(keys)
        
        Y{length(Y)+1}=currentKey; % Set the label for the next Y entry
        theData=abs(currentCells{j})';
+       theData=
        
        X=vertcat(X,abs(currentCells{j})'); % add data to the X matrix, only magnitude
        
