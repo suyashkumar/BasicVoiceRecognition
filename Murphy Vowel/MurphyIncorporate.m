@@ -27,5 +27,5 @@ for i=2:length(files)
     
 end
 
-save('MurphyData.mat','WordMapExtended')
+save('MurphyWordData.mat','WordMapExtended')
 
