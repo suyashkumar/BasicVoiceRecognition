@@ -12,7 +12,7 @@ for i=1:WordMap.length()
     TY2=abs(Y2)./max(abs(Y2(:)));
     St = sum((TY2 - mean(TY2) ).^2)
     Sr = sum((FftIn - mean(TY2)).^2)
-    r(i) = abs((St - Sr) / St)
+    r(i) = (Sr / St)
 end
 
 R(1) = max(r);
