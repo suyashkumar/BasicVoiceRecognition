@@ -25,11 +25,11 @@ subplot(222);
 plot(f1,P1,'k');
 ylabel('P1');
 grid on;
-axis tight
+axis([0,3400,0,3e-5])
 title('Power Spectrum')
 subplot(224);
 plot(f2,P2);
 ylabel('P2');
 grid on;
-axis tight
+axis([0,3400,0,3e-5])
 xlabel('Frequency (Hz)')
