@@ -1,11 +1,9 @@
-load WordData.mat
-WordMap = WordMapExtended;
+%WordSplitter.m
+%Takes samples of two input words in 0.025 second intervals for vowel
+%analysis. 
+%@authorh: Chris Eckersley
 
-%% Gets Data
-capData = WordMap('cap');
-batData = WordMap('bat');
-cdata = capData{1};
-cdata2 = batData{1};
+function [cdat, cdat2] = WordSplitter(word1, word2)
 
 %% Filters Data
 bpfilt = designfilt('bandpassfir','FilterOrder',1000,...
