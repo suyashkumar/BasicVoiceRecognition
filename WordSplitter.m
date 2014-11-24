@@ -1,7 +1,7 @@
 %WordSplitter.m
 %Takes samples of two input words in 0.025 second intervals for vowel
 %analysis. 
-%@authorh: Chris Eckersley
+%@author: Chris Eckersley
 
 function [cdat, cdat2] = WordSplitter(word1, word2)
 
@@ -9,8 +9,8 @@ function [cdat, cdat2] = WordSplitter(word1, word2)
 bpfilt = designfilt('bandpassfir','FilterOrder',1000,...
     'CutoffFrequency1',300,'CutoffFrequency2',3400,...
     'SampleRate',44100);
-cdat = filter(bpfilt,cdata);
-cdat2 = filter(bpfilt,cdata2);
+cdat = filter(bpfilt,word1);
+cdat2 = filter(bpfilt,word2);
 
 maxSignal = max(abs(cdat)); % Find maximum of input audio signal
 maxSignal2 = max(abs(cdat2));
