@@ -3,6 +3,7 @@ function [] = WordExtraction( WordMapExtended )
 % extracts all the words into the workspaces in the following form: 
 % <word><repitition> (this is a vector).
 % Example: cat1, cat2, cat3 vectors
+% @author Suyash Kumar (suyashkumar)
 
 
 keys=WordMapExtended.keys();
