@@ -1,6 +1,7 @@
 % Slightly modified verion of the code found at http://www.mathworks.com/help/signal/examples/measuring-signal-similarities.html#zmw57dd0e510
 % Calculated the power spectra of two inputs for comparison. Will be
 % augmented soon. 
+% @author Matthew McCann 
 
 function [P1,f1,P2,f2] = PowerSpec(word1, word2, word3, FsSig)
 
@@ -23,7 +24,7 @@ ylabel('s2');
 grid on
 subplot(325);
 plot(t,word3);
-ylabel('s2');
+ylabel('s3');
 grid on
 xlabel('Time (secs)')
 subplot(322);
