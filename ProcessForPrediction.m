@@ -1,4 +1,4 @@
-function [ outputSignal ] = ProcessForPrediction( inputSignal, threshold)
+function [ outputSignal, f ] = ProcessForPrediction( inputSignal, threshold)
 %UNTITLED10 Summary of this function goes here
 %   Detailed explanation goes here
 fs=44100;

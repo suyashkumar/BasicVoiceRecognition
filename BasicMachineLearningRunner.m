@@ -39,11 +39,12 @@ load MLModel10.mat;
 %inputfft=Binning(inputfft,100);
 %inputfft=inputfft./max(inputfft); % Normalize
 %inputSignal=inputSignal./max(inputSignal);
-P1=ProcessForPrediction(inputSignal,0.35);
+[P1,f]=ProcessForPrediction(inputSignal,0.35);
 %P1=P1(1:takeN6);
-P1=Binning(P1,180);
 subplot(2,1,2)
-plot(P1)
+plot(f,P1)
+P1=Binning(P1,180);
+
 
 % Predict: 
 tic
