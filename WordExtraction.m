@@ -8,6 +8,7 @@ function [] = WordExtraction( WordMapExtended )
 
 keys=WordMapExtended.keys();
 
+
 for key=keys
    currentArray=WordMapExtended(key{1});
    for i=1:length(currentArray)

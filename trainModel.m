@@ -9,7 +9,7 @@ function [ Mdl ] = trainModel( FourierMap, binningFactor, useTranslation )
 
 %% Init
 fs=44100; % Sample Rate
-load lex.mat
+load lex2.mat
 %% Train Model
 
 % Construct the X and Y matricies

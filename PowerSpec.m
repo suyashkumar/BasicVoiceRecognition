@@ -3,7 +3,7 @@
 % augmented soon. 
 % @author Matthew McCann 
 
-function [P1,f1,P2,f2] = PowerSpec(word1, word2, word3, FsSig)
+function [P1,f1,P2,f2,P3,f3] = PowerSpec(word1, word2, word3, FsSig)
 
 Fs = FsSig;         % Sampling Rate
 
