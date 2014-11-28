@@ -20,6 +20,11 @@ recordblocking(rSignal,2);
 inputSignal=getaudiodata(rSignal);
 disp('Thanks')
 
+bpfilt = designfilt('bandpassfir','FilterOrder',1000,...
+    'CutoffFrequency1',300,'CutoffFrequency2',3400,...
+    'SampleRate',44100);
+%inputSignal = filter(bpfilt,inputSignal);
+
 
 %inputSignal=CleanInput(inputSignal);
 disp('Playback')

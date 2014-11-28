@@ -15,7 +15,7 @@ shortI={'yin','din','gin'};
 
 figure(1)
 
-%shortA
+%shortA generations
 for i=1:length(shortA)
     currentArray=WordMapExtended(shortA{i});
     currentData=currentArray{1};
@@ -32,7 +32,7 @@ for i=1:length(shortA)
 
    
 end
-%shortI
+%shortI generations
 for i=1:length(shortA)
     currentArray=WordMapExtended(shortI{i});
     currentData=currentArray{1};
@@ -49,4 +49,6 @@ for i=1:length(shortA)
    
 end
 
+cd figures % Go to figured dir and export figure
 export_fig comp1.pdf -nocrop
+cd .. % get back to root directory. 
