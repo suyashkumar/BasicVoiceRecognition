@@ -105,7 +105,7 @@ save('MLModel9.mat','Mdl9') % Save Model
 % Uses translation
 
 clear powerSpectra;
-load WordData.mat
+load WordData2.mat
 powerSpectra=ProducePowerSpectra(WordMapExtended);
 powerSpectra=RemoveSmallPeaks(powerSpectra,0.35);
 Mdl10=trainTreeModel(powerSpectra,180,1);

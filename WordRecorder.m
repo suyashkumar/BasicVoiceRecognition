@@ -5,9 +5,10 @@
 
 %% Init
 clear, clc
-load WordData.mat;
+%load WordData.mat;
+WordMapExtended=containers.Map;
 fs=44100; % Sample Rate
-rSignal=audiorecorder(fs,16,1,1); % Recorder to hold signal
+rSignal=audiorecorder(fs,16,1,0); % Recorder to hold signal
 
 
 %% Get Signal iterativly
@@ -31,6 +32,6 @@ while 1
         WordMapExtended(word)={sampleSignal};
         
     end
-    save('WordData.mat','WordMapExtended') % Save Map to file. 
+    save('TestingData.mat','WordMapExtended') % Save Map to file. 
 end
 

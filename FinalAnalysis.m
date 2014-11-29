@@ -22,7 +22,7 @@ for i=1:length(shortA)
     [P1,f]=ProcessForPrediction(currentData,0.35);
     subplot(2,3,i);
     startupFigure()
-    plot(f,P1,'k-')
+       plot(f,P1,'k-')
     title(shortA{i})
     ylabel('Power (Normalized)')
     xlabel('Frequency (Hz)')

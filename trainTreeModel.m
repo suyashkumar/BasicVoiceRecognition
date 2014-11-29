@@ -23,6 +23,7 @@ for i=1:length(keys)
     currentKey=keys(i);
     currentKey=currentKey{1};
     currentCells=FourierMap(currentKey);
+    disp(currentKey)
     
    for j=1:length(FourierMap(currentKey))
        if (~useTranslation)
