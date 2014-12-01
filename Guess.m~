@@ -1,5 +1,4 @@
 function [R,Word,Rall] = Guess(FftIn)
-B = 250
 load WordData.mat
 WordMap=WordMapExtended;
 FftIn=fftshift(fft(FftIn));
@@ -7,8 +6,8 @@ currentF=linspace((-(1/2).*44100),((1/2).*44100),length(FftIn)); % Get the freq 
 FftIn = abs(FftIn)./max(abs(FftIn(:)));
 FftIn = FftIn.^2;
 FftIn = (FftIn.*(FftIn > .35));
-FftIn = Binning(FftIn,B);
-FftIn = FftIn./(max(FftIn));
+FftIn = Binning(FftIn,100);
+FftIn = FftIn./(max(FftIn);
 
 keys=WordMap.keys();
 for i=1:WordMap.length()
@@ -19,7 +18,7 @@ for i=1:WordMap.length()
     Y2 = Y2.^2;
     TY2=abs(Y2)./max(abs(Y2(:)));
     TY2=(TY2.*(TY2 > .35));
-    TY2 = Binning(TY2,B);
+    TY2 = Binning(TY2,100);
     TY2 = TY2./max(TY2);
     Sr(i) = sum((FftIn - TY2).^2)
     plot(FftIn)
@@ -51,8 +50,7 @@ Y2=fftshift(fft(F2));
 Y2 = Y2.^2;
 TY2=abs(Y2)./max(abs(Y2(:)));
 TY2=(TY2.*(TY2 > .35));
-TY2 = Binning(TY2,B);
-TY2 = TY2./(max(TY2));
+TY2 = Binning(TY2,100);    
 
 figure(2)
 plot(TY2)
