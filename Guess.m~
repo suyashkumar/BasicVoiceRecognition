@@ -1,31 +1,55 @@
 function [R,Word,Rall] = Guess(FftIn)
+
+%Constants
+B1 = 150;
+B2= 350;
+
+%Load Data
 load WordData.mat
 WordMap=WordMapExtended;
 FftIn=fftshift(fft(FftIn));
 currentF=linspace((-(1/2).*44100),((1/2).*44100),length(FftIn)); % Get the freq vector
+
+%Frequency Component
 FftIn = abs(FftIn)./max(abs(FftIn(:)));
 FftIn = FftIn.^2;
+
+%Cutoff Lower Frequencies
 FftIn = (FftIn.*(FftIn > .35));
-FftIn = Binning(FftIn,100);
-FftIn = FftIn./(max(FftIn);
+
+%First Bin
+FftIn1 = Binning(FftIn,B1);
+FftIn1 = FftIn1./(max(FftIn1));
+
+%Second Bin
+FftIn2 = Binning(FftIn,B2);
+FftIn2 = FftIn2./(max(FftIn2));
 
 keys=WordMap.keys();
 for i=1:WordMap.length()
     currentKey=keys{i}; % get current key
     currentBatch=WordMap(currentKey);
     F2 = currentBatch{1};
+    %Transform to Frequency Domain
     Y2=fftshift(fft(F2));
     Y2 = Y2.^2;
     TY2=abs(Y2)./max(abs(Y2(:)));
     TY2=(TY2.*(TY2 > .35));
-    TY2 = Binning(TY2,100);
-    TY2 = TY2./max(TY2);
-    Sr(i) = sum((FftIn - TY2).^2)
-    plot(FftIn)
-    hold on
-    plot(TY2)
-    hold off
+    
+    %First Bin
+    TY21 = Binning(TY2,B1);
+    TY21 = TY21./max(TY21);
+    
+    %Second Bin
+    TY22 = Binning(TY2,B2);
+    TY22 = TY22./max(TY22);
+    
+    length(FftIn2)
+    length(TY22)
+    %Find differences
+    Sr(i) = sum((FftIn1 - TY21).^2) + sum((FftIn2 - TY22).^2)
 end
+
 R = Sr;
 r = Sr;
 rt = r;
@@ -50,11 +74,16 @@ Y2=fftshift(fft(F2));
 Y2 = Y2.^2;
 TY2=abs(Y2)./max(abs(Y2(:)));
 TY2=(TY2.*(TY2 > .35));
-TY2 = Binning(TY2,100);    
+TY2 = Binning(TY2,B1);
+TY2 = TY2./(max(TY2));
+
+W = char(Word(1))
+if W(2) == 'a'
+    W = 'a';
 
 figure(2)
 plot(TY2)
 hold on
-plot(FftIn,'g')
+plot(FftIn1,'g')
 hold off
 title('Frequency Analysis of Top Result')

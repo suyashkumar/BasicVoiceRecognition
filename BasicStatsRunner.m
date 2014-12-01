@@ -25,5 +25,6 @@ figure(1)
 plot(inputSignal)
 title('Input Signal')
 
-[R,Word]=Guess(inputSignal)
+[R,Word,W]=Guess(inputSignal);
+fprintf('The Predicted Vowel is "%s" based on the word "%s", the calculated value was %s \n',W,char(Word(1)),min(R))
 
