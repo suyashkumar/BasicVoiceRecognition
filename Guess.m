@@ -2,6 +2,7 @@ function [R,Word,Rall] = Guess(FftIn)
 load WordData.mat
 WordMap=WordMapExtended;
 FftIn = abs(FftIn)./max(abs(FftIn(:)));
+FftIn = Binning(FftIn,50);
 
 keys=WordMap.keys();
 for i=1:WordMap.length()
@@ -10,6 +11,7 @@ for i=1:WordMap.length()
     F2 = currentBatch{1};
     Y2=fftshift(fft(F2));
     TY2=abs(Y2)./max(abs(Y2(:)));
+    TY2 = Binning(TY2,50);
     St = sum((TY2 - mean(TY2) ).^2)
     Sr = sum((FftIn - mean(TY2)).^2)
     r(i) = (Sr / St)
