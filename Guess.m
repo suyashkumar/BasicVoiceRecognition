@@ -1,4 +1,8 @@
 function [R,Word,W,Rall] = Guess(FftIn)
+%%Guess.m
+%%Takes an input and compares it to pre-recorded words.  Compares these
+%%values and estimates the vowel type of the mono-syllabic word.
+%%@author: Brendon Colbert
 
 %Constants
 B1 = 150;
@@ -46,7 +50,7 @@ for i=1:WordMap.length()
     
     length(FftIn2)
     length(TY22)
-    %Find differences
+    %Difference Value Calculation
     Sr(i) = sum((FftIn1 - TY21).^2) + sum((FftIn2 - TY22).^2)
 end
 
