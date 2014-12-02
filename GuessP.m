@@ -7,8 +7,7 @@ function [R,Word,W,Rall] = GuessP(FftIn)
 %Load Data
 load WordData.mat
 WordMap=WordMapExtended;
-[FftIn]=periodogram(FftIn);
-plot(FftIn)
+FftIn=periodogram(FftIn);
 %Normalize
 FftIn = (FftIn)./max((FftIn(:)));
 
