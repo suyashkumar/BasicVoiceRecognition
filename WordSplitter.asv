@@ -1,18 +1,16 @@
-load WordData.mat
-WordMap = WordMapExtended;
+%WordSplitter.m
+%Takes samples of two input words in 0.025 second intervals for vowel
+%analysis. 
+%@author: Chris Eckersley
 
-%% Gets Data
-capData = WordMap('cap');
-batData = WordMap('bat');
-cdata = capData{1};
-cdata2 = batData{1};
+function [fftr, ] = WordSplitter(word1, word2)
 
 %% Filters Data
 bpfilt = designfilt('bandpassfir','FilterOrder',1000,...
     'CutoffFrequency1',300,'CutoffFrequency2',3400,...
     'SampleRate',44100);
-cdat = filter(bpfilt,cdata);
-cdat2 = filter(bpfilt,cdata2);
+cdat = filter(bpfilt,word1);
+cdat2 = filter(bpfilt,word2);
 
 maxSignal = max(abs(cdat)); % Find maximum of input audio signal
 maxSignal2 = max(abs(cdat2));
@@ -47,25 +45,25 @@ while(count*1102<length(cdat))
     
     %First instances of each sound data are plotted on figure 1
     %If block of Data 1 contains non filtered sound data, it is plotted
-    if max(dat)>0 
-        figure(count1)
-        subplot(2,1,1)
-        plot(currentF, abs(fftr)/max(abs(fftr)))
-        count1= count1+1;
-        t = sum(abs(fftr(find(currentF>500 & currentF<525):find(currentF>600 & currentF<625))));
-        y = sum(abs(fftr(find(currentF>1640 & currentF<1670):find(currentF>1720 & currentF<1740))));
-        title(strcat('585 Hz = ',int2str(t),' 1710 Hz = ',int2str(y)))
-    end
+%     if max(dat)>0 
+%         figure(count1)
+%         subplot(2,1,1)
+%         plot(currentF, abs(fftr)/max(abs(fftr)))
+%         count1= count1+1;
+%         t = sum(abs(fftr(find(currentF>500 & currentF<525):find(currentF>600 & currentF<625))));
+%         y = sum(abs(fftr(find(currentF>1670 & currentF<1710):find(currentF>1710 & currentF<1750))));
+%         title(strcat('585 Hz = ',int2str(t),' 1710 Hz = ',int2str(y)))
+%     end
     
     %If block of Data2 contains sound data it is plotted
-    if max(dat2)>0
-        figure(count2)
-        subplot(2,1,2)
-        plot(currentF2, abs(fftr2)/max(abs(fftr2)))
-        count2 = count2+1;
-        t2 = sum(abs(fftr2(find(currentF2>500 & currentF2<525):find(currentF2>600 & currentF2<625))));
-        y2 = sum(abs(fftr2(find(currentF2>1680 & currentF2<1700):find(currentF2>1720 & currentF2<1740))));
-        title(strcat('585 Hz = ',int2str(t2),' 1710 Hz = ',int2str(y2)))
-    end
-    count = count+1;
-end
+%     if max(dat2)>0
+%         figure(count2)
+%         subplot(2,1,2)
+%         plot(currentF2, abs(fftr2)/max(abs(fftr2)))
+%         count2 = count2+1;
+%         t2 = sum(abs(fftr2(find(currentF2>500 & currentF2<525):find(currentF2>600 & currentF2<625))));
+%         y2 = sum(abs(fftr2(find(currentF2>1670 & currentF2<1710):find(currentF2>1710 & currentF2<1750))));
+%         title(strcat('585 Hz = ',int2str(t2),' 1710 Hz = ',int2str(y2)))
+%     end
+%     count = count+1;
+% end
