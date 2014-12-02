@@ -4,29 +4,61 @@ function [R,Word,W,Rall] = GuessP(FftIn)
 %%values and estimates the vowel type of the mono-syllabic word.
 %%@author: Brendon Colbert
 
+%Constants
+B1 = 150;
+B2= 350;
+
 %Load Data
-load WordData.mat
+load MurphyVowelData.mat
 WordMap=WordMapExtended;
-FftIn=periodogram(FftIn);
-%Normalize
-FftIn = (FftIn)./max((FftIn(:)));
+FftIn=fftshift(fft(FftIn));
+length(FftIn)
+currentF=linspace((-(1/2).*44100),((1/2).*44100),length(FftIn)); % Get the freq vector
+
+%Frequency Component
+FftIn = abs(FftIn)./max(abs(FftIn(:)));
+FftIn = FftIn.^2;
 
 %Cutoff Lower Frequencies
-FftIn = (FftIn.*(FftIn > .20));
+FftIn = (FftIn.*(FftIn > .2));
+
+%First Bin
+FftIn1 = Binning(FftIn,B1);
+FftIn1 = FftIn1./(max(FftIn1));
+
+%Second Bin
+FftIn2 = Binning(FftIn,B2);
+FftIn2 = FftIn2./(max(FftIn2));
 
 keys=WordMap.keys();
 for i=1:WordMap.length()
     currentKey=keys{i}; % get current key
     currentBatch=WordMap(currentKey);
-    F2 = currentBatch{1};
+    F2 = currentBatch{length(currentBatch)};
+    if F2 < 88200;
+        F2 = FftIn.*0;
+    end
     %Transform to Frequency Domain
-    [Y2x,Y2]=periodogram(F2);
+    Y2=fftshift(fft(F2));
+    length(Y2)
+    Y2 = Y2.^2;
+    TY2=abs(Y2)./max(abs(Y2(:)));
+    TY2=(TY2.*(TY2 > .2));
     
-    TY2=(Y2)./max((Y2(:)));
-    TY2=(TY2.*(TY2 > .20));
+    %First Bin
+    TY21 = Binning(TY2,B1);
+    TY21 = TY21./max(TY21);
     
+    %Second Bin
+    TY22 = Binning(TY2,B2);
+    TY22 = TY22./max(TY22);
+    
+    length(FftIn2)
+    length(TY22)
     %Difference Value Calculation
-    Sr(i) = sum((FftIn - TY2).^2)
+    length(FftIn1)
+    length(TY21)
+    Sr(i) = sum((FftIn1 - TY21).^2) + sum((FftIn2 - TY22).^2);
 end
 
 R = Sr;
@@ -49,9 +81,12 @@ Rall = r;
 currentKey=keys{find(r==R(1))};
 currentBatch=WordMap(currentKey);
 F2 = currentBatch{1};
-[Y2x,Y2]=periodogram(F2);
-TY2=(Y2)./max((Y2(:)));
-TY2=(TY2.*(TY2 > .20));
+Y2=fftshift(fft(F2));
+Y2 = Y2.^2;
+TY2=abs(Y2)./max(abs(Y2(:)));
+TY2=(TY2.*(TY2 > .2));
+TY2 = Binning(TY2,B1);
+TY2 = TY2./(max(TY2));
 
 %Vowel Sound
 W = char(Word(1))
@@ -59,13 +94,11 @@ if W(2) == 'a'
     W = 'a';
 elseif W(2) == 'i'
     W = 'i';
-elseif W(2) == 'u'
-    W = 'u';
 end
 
 figure(2)
-plot(Y2x,TY2)
+plot(TY2)
 hold on
-plot(FftInx,FftIn,'g')
+plot(FftIn1,'g-')
 hold off
 title('Frequency Analysis of Top Result')
