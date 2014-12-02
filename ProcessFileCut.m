@@ -11,7 +11,7 @@ for i = 1:length(outer)
     currentF=linspace((-(1/2).*dt),((1/2).*dt),length(TcurrentFFT)); % Get the freq vector
     figure(i)
     subplot(1,2,1)
-    Y = TcurrentFFT./max(TcurrentFFT(:))
+    Y = TcurrentFFT./max(TcurrentFFT(:));
     plot(currentF,Y);
     subplot(1,2,2)
     plot(currentF,abs(currentFFT)./abs(max(currentFFT(:))))
