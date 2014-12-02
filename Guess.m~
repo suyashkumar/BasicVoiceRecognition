@@ -77,7 +77,7 @@ F2 = currentBatch{1};
 Y2=fftshift(fft(F2));
 Y2 = Y2.^2;
 TY2=abs(Y2)./max(abs(Y2(:)));
-TY2=(TY2.*(TY2 > .2));
+TY2=(TY2.*(TY2 > .35));
 TY2 = Binning(TY2,B1);
 TY2 = TY2./(max(TY2));
 
