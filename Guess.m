@@ -9,7 +9,7 @@ B1 = 150;
 B2= 350;
 
 %Load Data
-load WordData.mat
+load WordData2.mat
 WordMap=WordMapExtended;
 FftIn=fftshift(fft(FftIn));
 currentF=linspace((-(1/2).*44100),((1/2).*44100),length(FftIn)); % Get the freq vector
@@ -92,8 +92,9 @@ elseif W(2) == 'u'
 end
 
 figure(2)
-plot(TY2)
+plot(TY2,'k-')
 hold on
-plot(FftIn1,'g')
+plot(FftIn1,'g-.')
 hold off
 title('Frequency Analysis of Top Result')
+legend('Match Word','Input Word')
