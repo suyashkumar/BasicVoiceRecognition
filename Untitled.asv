@@ -1,0 +1,30 @@
+keys = WordMapExtended.keys();
+data = WordMapExtended('bat');
+fft1 = fftshift(fft(data{1,1}));
+currentF=linspace((-(1/2).*44100),((1/2).*44100),length(fft1));
+figure(1)
+startupFigure();
+plot(currentF,abs(fft1)/max(abs(fft1)),'k')
+xlabel('Frequency Hz')
+ylabel('Normalized Magnitude')
+processFigure(gca,gcf,1)
+bpfilt = designfilt('bandpassfir','FilterOrder',1000,...
+    'CutoffFrequency1',300,'CutoffFrequency2',3400,...
+    'SampleRate',44100);
+filt = filter(bpfilt,data{1,1});
+fft2 = fftshift(fft(filt));
+currentF2=linspace((-(1/2).*44100),((1/2).*44100),length(fft2));
+figure(2)
+startupFigure();
+plot(currentF2,abs(fft2)/max(abs(fft2)),'k')
+xlabel('Frequency Hz')
+ylabel('Normalized Magnitude')
+processFigure(gca,gcf,1)
+
+fft3 = CleanInput(fft2);
+currentF3=linspace((-(1/2).*44100),((1/2).*44100),length(fft3));
+figure(3)
+startupFigure();
+plot(currentF3,abs(fft3)/max(abs(fft3)),'k')
+xlabel('Frequency Hz')
+ylabel('Normalized Magnitude')

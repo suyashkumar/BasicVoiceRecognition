@@ -5,8 +5,8 @@
 
 %% Init
 clear, clc
-%load WordData.mat;
-WordMapExtended=containers.Map;
+load TestSet8.mat;
+%WordMapExtended=containers.Map;
 fs=44100; % Sample Rate
 rSignal=audiorecorder(fs,16,1,0); % Recorder to hold signal
 
@@ -24,7 +24,7 @@ while 1
     if (WordMapExtended.isKey(word))
         % Simply append to the cell array
         current=WordMapExtended(word);
-        current{length(current)+1}=sampleSignal;
+        current{length(current)+1}=sampleSignal
         WordMapExtended(word)=current;
         
     else 
@@ -32,6 +32,6 @@ while 1
         WordMapExtended(word)={sampleSignal};
         
     end
-    save('TestingData.mat','WordMapExtended') % Save Map to file. 
+    save('TestSet9.mat','WordMapExtended') % Save Map to file. 
 end
 
