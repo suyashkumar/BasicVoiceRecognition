@@ -112,11 +112,18 @@ Mdl10=trainTreeModel(powerSpectra,180,1);
 save('MLModel10.mat','Mdl10') % Save Model
 
 
+%Model 11
+% Original Data Set of words, no translation, uses POWER SPECTRA
+% Only keeps peaks 35% of max bin at 180
+% TRAINS A CLASSIFICATION TREE
+% Uses translation
 
-
-
-
-
+clear powerSpectra;
+load WordData2.mat
+powerSpectra=ProducePowerSpectra(WordMapExtended);
+powerSpectra=RemoveSmallPeaks(powerSpectra,0.35);
+Mdl11=trainTreeModel(powerSpectra,180,1);
+save('MLModel11.mat','Mdl11') % Save Model
 
 
 

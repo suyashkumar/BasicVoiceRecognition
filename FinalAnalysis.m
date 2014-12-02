@@ -5,6 +5,7 @@
 %% Init
 clear, clc, clf;
 load WordData.mat
+threshold=0.35;
 
 %% Plots
 
@@ -19,7 +20,7 @@ figure(1)
 for i=1:length(shortA)
     currentArray=WordMapExtended(shortA{i});
     currentData=currentArray{1};
-    [P1,f]=ProcessForPrediction(currentData,0.35);
+    [P1,f]=ProcessForPrediction(currentData,threshold);
     subplot(2,3,i);
     startupFigure()
        plot(f,P1,'k-')
@@ -36,7 +37,7 @@ end
 for i=1:length(shortA)
     currentArray=WordMapExtended(shortI{i});
     currentData=currentArray{1};
-    [P1,f]=ProcessForPrediction(currentData,0.35);
+    [P1,f]=ProcessForPrediction(currentData,threshold);
     subplot(2,3,i+3);
     startupFigure()
     plot(f,P1,'k-')
@@ -50,5 +51,5 @@ for i=1:length(shortA)
 end
 
 cd figures % Go to figured dir and export figure
-export_fig comp1.pdf -nocrop
+export_fig comp.pdf -nocrop
 cd .. % get back to root directory. 

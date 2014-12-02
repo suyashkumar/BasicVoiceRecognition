@@ -35,15 +35,8 @@ plot(inputSignal)
 
 
 %[inputfft, inputSignalfft]=BPFiltFFT(inputSignal);
-load MLModel10.mat;
+load MLModel11.mat;
 
-
-% Calc vector size
-%inputfft=fftshift(fft(inputSignal));
-%inputfft=inputfft(1:takeN1);
-%inputfft=Binning(inputfft,100);
-%inputfft=inputfft./max(inputfft); % Normalize
-%inputSignal=inputSignal./max(inputSignal);
 [P1,f]=ProcessForPrediction(inputSignal,0.35);
 %P1=P1(1:takeN6);
 subplot(2,1,2)
@@ -54,7 +47,7 @@ P1=Binning(P1,180);
 % Predict: 
 tic
 disp('Prediction')
-predict(Mdl10,P1)
+predict(Mdl11,P1)
 toc
 
 

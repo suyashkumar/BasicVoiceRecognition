@@ -1,4 +1,5 @@
 %% PredictorStats
+%  @author Suyash Kumar (suyashkumar)
 
 %% Init
 clc, clear, clf;
@@ -7,9 +8,8 @@ load TestingData.mat
 
 %% Predict
 
-
 percentCorrect=[]
-cutoffs=0:.05:1;
+cutoffs=0:.1:1;
 
 % Cutoffs
 for i=cutoffs
@@ -35,11 +35,11 @@ for i=cutoffs
             P1=Binning(P1,180);
           result=predict(Mdl10,P1);
 
-          if strcmp(result,lex(testKey))
+          if strcmp(result{1},lex(testKey))
               % Correct Prediction
               disp('correct')
-              disp(result)
-              disp(testKey)
+              disp(result{1})
+              disp(lex(testKey))
               numCorrect=numCorrect+1;
               totalNum=totalNum+1;
           else
@@ -59,7 +59,7 @@ end
 figure(1)
 clf
 startupFigure()
-plot(cutoffs,percentCorrect,'k.-','MarkerSize',20);
+plot(cutoffs,percentCorrect,'k.-','MarkerSize',30);
 title('Prediction Accuracy vs. Threshold (bin size=180)')
 ylim([0,1.3])
 xlabel('Threshold (percent of max)')
@@ -69,10 +69,7 @@ cd figures
 export_fig cutoffs.pdf -nocrop
 cd ..
 
-
-
-
-binSizes=2:50:800;
+binSizes=2:20:800;
 percentCorrectBin=[]
 
 % Bin Size
@@ -124,7 +121,7 @@ end
 figure(2)
 clf
 startupFigure()
-plot(binSizes,percentCorrectBin,'k.','MarkerSize',20)
+plot(binSizes,percentCorrectBin,'k.','MarkerSize',30)
 title('Prediction Accuracy vs. Bin Size (threshold=0.3)');
 xlabel('Bin Size')
 ylabel('Prediction Accuracy')
@@ -133,4 +130,74 @@ processFigure(gca,gcf,1)
 cd figures
 export_fig binSizes.pdf -nocrop
 cd ..
+
+%% Compare accuracy over difficulty:
+
+% Train model on WordData2.mat
+ clear powerSpectra;
+    load WordData2.mat
+    powerSpectra=ProducePowerSpectra(WordMapExtended);
+    powerSpectra=RemoveSmallPeaks(powerSpectra,0.35);
+    Mdl10=trainTreeModel(powerSpectra,180,1);
+
+% Test on all Test Sets: 
+
+testSets={'TestSet1.mat','TestSet2.mat', 'TestSet3.mat','TestSet4.mat','TestSet5.mat', 'TestSet6.mat','TestSet7.mat','TestSet8.mat','TestSet9.mat'};
+percentCorrect2=[];
+for set=testSets
+    load(set{1}); % load current test set
+    numCorrect=0;
+    totalNum=0;
+    for testKey=WordMapExtended.keys()
+       testKey=testKey{1};
+       disp(testKey)
+       currentArray=WordMapExtended(testKey);
+       for j=1:length(currentArray)
+           [P1,f]=ProcessForPrediction(currentArray{j},0.3);
+            subplot(2,1,2)
+            plot(f,P1)
+            P1=Binning(P1,180);
+          result=predict(Mdl10,P1);
+
+          if strcmp(result{1},lex(testKey))
+              % Correct Prediction
+              disp('correct')
+              disp(result)
+              disp(lex(testKey))
+              disp(lex(testKey))
+              numCorrect=numCorrect+1;
+              totalNum=totalNum+1;
+          else
+              disp('incorrect')
+              disp(result)
+              disp(testKey)
+              
+              totalNum=totalNum+1;
+          end
+           
+       end
+       
+    end
+    percentCorrect2(length(percentCorrect2)+1)=numCorrect./totalNum;
+    
+    
+end
+
+figure(3)
+startupFigure()
+plot(1:length(percentCorrect2),percentCorrect2,'k.','MarkerSize',20);
+title('Prediction Accuracy vs. Number of Untrained Words')
+xlabel('Number of Untrained Words in Test Set')
+ylabel('Classification Accuracy')
+processFigure(gca,gcf,1)
+
+cd figures
+export_fig accuracyVsWords.pdf -nocrop
+cd ..
+
+
+
+
+
+
 
