@@ -11,9 +11,10 @@ for i=1:WordMap.length()
         [vp,fp] = periodogram(currentData,[],[],44100,'power');
         dat = dat(1:length(vp));
         if i==1 && j==1
-            length(vp)
-            length(dat)
+        length(vp)
+        length(dat)
             gguess = currentKey;
+
             mindiff = sum(abs(dat-vp));
         else
             newdiff = sum(abs(dat-vp));
