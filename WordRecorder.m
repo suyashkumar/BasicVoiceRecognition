@@ -5,7 +5,8 @@
 
 %% Init
 clear, clc
-load TestSet8.mat;
+load TestSet10.mat;
+load lex2.mat;
 %WordMapExtended=containers.Map;
 fs=44100; % Sample Rate
 rSignal=audiorecorder(fs,16,1,0); % Recorder to hold signal
@@ -32,6 +33,12 @@ while 1
         WordMapExtended(word)={sampleSignal};
         
     end
-    save('TestSet9.mat','WordMapExtended') % Save Map to file. 
+    if (~lex.isKey(word))
+        % Add to lexicon and save
+        vowel=input('Word not in lexicon, what is vowel designation:','s');
+        lex(word)=vowel;
+        save('lex2.mat','lex');
+    end
+    save('TestSet10.mat','WordMapExtended') % Save Map to file. 
 end
 

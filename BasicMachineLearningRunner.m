@@ -46,9 +46,12 @@ P1=Binning(P1,180);
 
 % Predict: 
 tic
-disp('Prediction')
-predict(Mdl11,P1)
+disp('Predicting...')
+result=predict(Mdl11,P1);
 toc
+printCell=strcat('Vowel Prediction:',{' '},result);
+disp(printCell{1});
+
 
 
 

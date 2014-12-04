@@ -9,7 +9,7 @@ load TestingData.mat
 %% Predict
 
 percentCorrect=[]
-cutoffs=0:.1:1;
+cutoffs=0:.05:1;
 
 % Cutoffs
 for i=cutoffs
@@ -69,7 +69,7 @@ cd figures
 export_fig cutoffs.pdf -nocrop
 cd ..
 
-binSizes=2:20:800;
+binSizes=2:10:800;
 percentCorrectBin=[]
 
 % Bin Size
@@ -185,7 +185,7 @@ end
 
 figure(3)
 startupFigure()
-plot(1:length(percentCorrect2),percentCorrect2,'k.','MarkerSize',20);
+plot(1:length(percentCorrect2),percentCorrect2,'k.','MarkerSize',40);
 title('Prediction Accuracy vs. Number of Untrained Words')
 xlabel('Number of Untrained Words in Test Set')
 ylabel('Classification Accuracy')

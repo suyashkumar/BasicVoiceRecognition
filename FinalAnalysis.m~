@@ -64,32 +64,15 @@ figure(2)
 startupFigure()
 plot(bat1,'k')
 processFigure(gca,gcf,1)
-export_fig wf_1.pdf 
-cd ..
 figure(3)
 startupFigure()
-[P1_1,f]=ProcessForPrediction(bat1,0);
-plot(f,P1_1,'k')
+[P1,f]=ProcessForPrediction(bat1,0.35);
+plot(P1,'k')
 xlim([0,4000])
 processFigure(gca,gcf,1)
-cd figures
-export_fig wf_2.pdf 
-cd ..
 figure(4)
 startupFigure()
-[P1_2,f]=ProcessForPrediction(bat1,0.35)
-plot(f,P1_2,'k');
-xlim([0,4000])
-processFigure(gca,gcf,1)
-cd figures
-export_fig wf_3.pdf
-cd .. 
-figure(5)
-startupFigure()
-binnedData=Binning(P1_2,180);
-stem(binnedData./max(binnedData),'k.-','MarkerSize',20,'DefaultLineWidth',20)
+binnedData=Binning(P1,180);
+stem(binnedData./max(binnedData),'k.','MarkerSize',20)
 xlim([0,22])
 processFigure(gca,gcf,1)
-cd figures
-export_fig wf_4.pdf 
-cd ..
