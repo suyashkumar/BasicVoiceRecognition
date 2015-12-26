@@ -25,7 +25,7 @@ ylabel('s1');
 xlabel('Time (secs)')
 subplot(3,1,2)
 plot(F1,FFT1./max(FFT1),'k');
-xlim([-3600,3600])
+xlim([0,3600])
  xlabel('Frequency (Hz)')
  ylabel('Magnitude')
 subplot(3,1,3);
@@ -43,7 +43,7 @@ ylabel('s2');
 xlabel('Time (secs)')
 subplot(3,1,2)
 plot(F2,FFT2./max(FFT2),'k');
-xlim([-3600,3600])
+xlim([0,3600])
  xlabel('Frequency (Hz)')
  ylabel('Magnitude')
 subplot(3,1,3);
@@ -61,7 +61,7 @@ ylabel('s3');
 xlabel('Time (secs)')
 subplot(3,1,2)
 plot(F3,FFT3./max(FFT3),'k');
-xlim([-3600,3600])
+xlim([0,3600])
  xlabel('Frequency (Hz)')
  ylabel('Magnitude')
 subplot(3,1,3);
